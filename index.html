@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Descargar Notebook - App de Predicción</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .info-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-section li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-section li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .download-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .download-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .download-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .download-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .instructions h4 {
+            color: #856404;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+            color: #856404;
+            line-height: 1.8;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #ffffff;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .download-btn {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="#667eea"/>
+                    </svg>
+                </div>
+            </div>
+            <h1>🧠 App de Predicción</h1>
+            <p>Red Neuronal vs Regresión Lineal - Notebook Descargable</p>
+        </div>
+
+        <div class="content">
+            <div class="info-section">
+                <h3>📦 Contenido del Notebook</h3>
+                <ul>
+                    <li>Implementación completa de Red Neuronal con Keras/TensorFlow</li>
+                    <li>Modelo de Regresión Lineal para comparación</li>
+                    <li>Interfaz interactiva con Streamlit</li>
+                    <li>Visualizaciones con Plotly</li>
+                    <li>Métricas de evaluación detalladas</li>
+                    <li>Instrucciones de instalación y despliegue</li>
+                </ul>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Interactivo</h4>
+                    <p>Slider para épocas y inputs manuales</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Visual</h4>
+                    <p>Gráficos comparativos detallados</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Rápido</h4>
+                    <p>Entrenamiento en segundos</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h4>Deploy</h4>
+                    <p>Listo para Streamlit Cloud</p>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h4>⚙️ Instrucciones de Uso</h4>
+                <ol>
+                    <li>Descarga el archivo <strong>.ipynb</strong> haciendo clic en el botón</li>
+                    <li>Abre el notebook en Google Colab o Jupyter</li>
+                    <li>Instala las dependencias: <code>pip install streamlit tensorflow scikit-learn plotly</code></li>
+                    <li>Ejecuta las celdas en orden</li>
+                    <li>Para Streamlit: <code>streamlit run app.py</code></li>
+                </ol>
+            </div>
+
+            <div class="download-section">
+                <button class="download-btn" id="downloadBtn" onclick="downloadNotebook()">
+                    <div class="btn-content">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <span id="btnText">Descargar Notebook (.ipynb)</span>
+                        <div class="loading-spinner" id="spinner"></div>
+                    </div>
+                </button>
+                <div class="success-message" id="successMessage">
+                    ✅ ¡Descarga iniciada! Revisa tu carpeta de descargas.
+                </div>
+                <div class="error-message" id="errorMessage">
+                    ❌ Error al descargar. Intenta nuevamente.
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>📋 Requisitos del Sistema</h3>
+                <ul>
+                    <li>Python 3.8 o superior</li>
+                    <li>TensorFlow 2.x</li>
+                    <li>Streamlit 1.x</li>
+                    <li>Scikit-learn</li>
+                    <li>Plotly</li>
+                    <li>Pandas & NumPy</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🧠 <strong>Taller de Machine Learning</strong> | Red Neuronal con Streamlit</p>
+            <p>Desarrollado para fines educativos - <a href="#" onclick="alert('Sube tu repositorio a GitHub y comparte el link!')">Subir a GitHub</a></p>
+        </div>
+    </div>
+
+    <script>
+        function getNotebookContent() {
+            return {
+                "cells": [
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "# 🧠 App de Predicción con Streamlit\n",
+                            "## Comparación: Red Neuronal (Keras) vs Regresión Lineal\n",
+                            "\n",
+                            "### 🎯 Objetivo\n",
+                            "Crear una aplicación que entrene una red neuronal y compare sus resultados con otro modelo.\n",
+                            "\n",
+                            "---\n",
+                            "\n",
+                            "**Autor:** Taller de Machine Learning\n",
+                            "\n",
+                            "**Fecha:** 2024"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 📦 1. Instalación de Dependencias"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Instalar librerías necesarias\n",
+                            "!pip install streamlit tensorflow numpy scikit-learn plotly pandas matplotlib"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 🔧 2. Importaciones"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "import tensorflow as tf\n",
+                            "import numpy as np\n",
+                            "from tensorflow import keras\n",
+                            "from sklearn.linear_model import LinearRegression\n",
+                            "from sklearn.metrics import mean_squared_error, r2_score\n",
+                            "import pandas as pd\n",
+                            "import matplotlib.pyplot as plt\n",
+                            "\n",
+                            "print('✅ Todas las librerías importadas correctamente')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 📊 3. Cargar y Preparar Datos"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Datos de entrenamiento del ejemplo original\n",
+                            "xs = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)\n",
+                            "ys = np.array([-2.0, 1.0, 4.0, 7.0, 10.0, 13.0], dtype=float)\n",
+                            "\n",
+                            "# Mostrar datos\n",
+                            "print('=== Datos de Entrenamiento ===')\n",
+                            "for i in range(len(xs)):\n",
+                            "    print(f'X: {xs[i]:.1f} → Y: {ys[i]:.1f}')\n",
+                            "\n",
+                            "print('\\n💡 Patrón detectado: Y = 3X + 1')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 🧠 4. Modelo 1: Red Neuronal (Keras)"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Crear modelo secuencial\n",
+                            "nn_model = tf.keras.Sequential([\n",
+                            "    keras.layers.Dense(units=1, input_shape=[1])\n",
+                            "])\n",
+                            "\n",
+                            "# Compilar modelo\n",
+                            "nn_model.compile(\n",
+                            "    optimizer='sgd',\n",
+                            "    loss='mean_squared_error',\n",
+                            "    metrics=['mae']\n",
+                            ")\n",
+                            "\n",
+                            "print('✅ Modelo de Red Neuronal creado y compilado')"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Entrenar modelo\n",
+                            "epochs = 500\n",
+                            "print(f'🔄 Entrenando con {epochs} épocas...')\n",
+                            "\n",
+                            "history = nn_model.fit(\n",
+                            "    xs, \n",
+                            "    ys, \n",
+                            "    epochs=epochs, \n",
+                            "    verbose=1\n",
+                            ")\n",
+                            "\n",
+                            "print('\\n✅ Entrenamiento completado')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 📐 5. Modelo 2: Regresión Lineal (Sklearn)"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Preparar datos para sklearn\n",
+                            "X_train = xs.reshape(-1, 1)\n",
+                            "y_train = ys\n",
+                            "\n",
+                            "# Crear y entrenar modelo\n",
+                            "lr_model = LinearRegression()\n",
+                            "lr_model.fit(X_train, y_train)\n",
+                            "\n",
+                            "print('=== Regresión Lineal ===')\n",
+                            "print(f'Coeficiente (m): {lr_model.coef_[0]:.4f}')\n",
+                            "print(f'Intercepto (b): {lr_model.intercept_:.4f}')\n",
+                            "print(f'\\nFórmula: Y = {lr_model.coef_[0]:.2f}X + {lr_model.intercept_:.2f}')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 🔮 6. Realizar Predicciones"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Valor a predecir (puedes cambiar este valor)\n",
+                            "input_value = 10.0\n",
+                            "\n",
+                            "# Predicción con Red Neuronal\n",
+                            "nn_prediction = nn_model.predict(\n",
+                            "    np.array([input_value], dtype=float), \n",
+                            "    verbose=0\n",
+                            ")[0][0]\n",
+                            "\n",
+                            "# Predicción con Regresión Lineal\n",
+                            "lr_prediction = lr_model.predict([[input_value]])[0]\n",
+                            "\n",
+                            "# Valor esperado (Y = 3X + 1)\n",
+                            "expected_value = 3 * input_value + 1\n",
+                            "\n",
+                            "print('=== Resultados de Predicción ===')\n",
+                            "print(f'Valor de entrada (X): {input_value}')\n",
+                            "print(f'\\n🧠 Red Neuronal: {nn_prediction:.4f}')\n",
+                            "print(f'📐 Regresión Lineal: {lr_prediction:.4f}')\n",
+                            "print(f'📊 Valor Esperado: {expected_value:.4f}')\n",
+                            "print(f'\\nError RN: {abs(nn_prediction - expected_value):.4f}')\n",
+                            "print(f'Error RL: {abs(lr_prediction - expected_value):.4f}')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 📈 7. Evaluación de Modelos"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Métricas para Red Neuronal\n",
+                            "nn_predictions = nn_model.predict(xs.reshape(-1, 1), verbose=0).flatten()\n",
+                            "nn_mse = mean_squared_error(ys, nn_predictions)\n",
+                            "nn_r2 = r2_score(ys, nn_predictions)\n",
+                            "\n",
+                            "# Métricas para Regresión Lineal\n",
+                            "lr_predictions = lr_model.predict(xs.reshape(-1, 1))\n",
+                            "lr_mse = mean_squared_error(ys, lr_predictions)\n",
+                            "lr_r2 = r2_score(ys, lr_predictions)\n",
+                            "\n",
+                            "print('=== Métricas de Evaluación ===')\n",
+                            "print('\\n🧠 Red Neuronal:')\n",
+                            "print(f'  MSE (Error Cuadrático Medio): {nn_mse:.6f}')\n",
+                            "print(f'  R² (Coeficiente de Determinación): {nn_r2:.6f}')\n",
+                            "print('\\n📐 Regresión Lineal:')\n",
+                            "print(f'  MSE (Error Cuadrático Medio): {lr_mse:.6f}')\n",
+                            "print(f'  R² (Coeficiente de Determinación): {lr_r2:.6f}')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 📊 8. Visualización de Resultados"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Gráfico 1: Evolución de la pérdida\n",
+                            "plt.figure(figsize=(12, 5))\n",
+                            "\n",
+                            "plt.subplot(1, 2, 1)\n",
+                            "plt.plot(history.history['loss'], linewidth=2, color='#667eea')\n",
+                            "plt.title('📉 Evolución de la Pérdida', fontsize=14, fontweight='bold')\n",
+                            "plt.xlabel('Épocas', fontsize=12)\n",
+                            "plt.ylabel('Pérdida (MSE)', fontsize=12)\n",
+                            "plt.grid(True, alpha=0.3)\n",
+                            "\n",
+                            "# Gráfico 2: Comparación de predicciones\n",
+                            "plt.subplot(1, 2, 2)\n",
+                            "models = ['Red Neuronal', 'Regresión Lineal', 'Esperado']\n",
+                            "values = [nn_prediction, lr_prediction, expected_value]\n",
+                            "colors = ['#667eea', '#764ba2', '#28a745']\n",
+                            "\n",
+                            "plt.bar(models, values, color=colors, edgecolor='white', linewidth=2)\n",
+                            "plt.title('🎯 Comparación de Predicciones', fontsize=14, fontweight='bold')\n",
+                            "plt.ylabel('Valor Predicho', fontsize=12)\n",
+                            "plt.xticks(fontsize=10)\n",
+                            "\n",
+                            "# Añadir valores en las barras\n",
+                            "for i, v in enumerate(values):\n",
+                            "    plt.text(i, v + 0.5, f'{v:.2f}', ha='center', fontsize=11, fontweight='bold')\n",
+                            "\n",
+                            "plt.tight_layout()\n",
+                            "plt.show()"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Gráfico 3: Ajuste del modelo vs datos originales\n",
+                            "plt.figure(figsize=(10, 6))\n",
+                            "\n",
+                            "# Datos originales\n",
+                            "plt.scatter(xs, ys, s=100, c='#28a745', label='Datos Originales', zorder=5, edgecolors='white', linewidth=2)\n",
+                            "\n",
+                            "# Línea de regresión\n",
+                            "x_range = np.linspace(min(xs) - 1, max(xs) + 1, 100)\n",
+                            "lr_line = lr_model.predict(x_range.reshape(-1, 1))\n",
+                            "plt.plot(x_range, lr_line, '--', linewidth=2, color='#764ba2', label='Regresión Lineal')\n",
+                            "\n",
+                            "# Línea esperada\n",
+                            "expected_line = 3 * x_range + 1\n",
+                            "plt.plot(x_range, expected_line, ':', linewidth=2, color='#dc3545', label='Valor Esperado (Y=3X+1)')\n",
+                            "\n",
+                            "plt.title('🎯 Ajuste de Modelos vs Datos Originales', fontsize=14, fontweight='bold')\n",
+                            "plt.xlabel('X (Entrada)', fontsize=12)\n",
+                            "plt.ylabel('Y (Salida)', fontsize=12)\n",
+                            "plt.legend(fontsize=10)\n",
+                            "plt.grid(True, alpha=0.3)\n",
+                            "plt.show()"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 🚀 9. Crear Aplicación Streamlit"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Crear archivo requirements.txt\n",
+                            "requirements = \"\"\"streamlit\n",
+                            "tensorflow\n",
+                            "numpy\n",
+                            "scikit-learn\n",
+                            "plotly\n",
+                            "pandas\n",
+                            "matplotlib\n",
+                            "\"\"\"\n",
+                            "\n",
+                            "with open('requirements.txt', 'w', encoding='utf-8') as f:\n",
+                            "    f.write(requirements)\n",
+                            "\n",
+                            "print('✅ requirements.txt creado')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 📝 10. Código Completo de la App Streamlit"
+                        ]
+                    },
+                    {
+                        "cell_type": "code",
+                        "execution_count": null,
+                        "metadata": {},
+                        "outputs": [],
+                        "source": [
+                            "# Crear archivo app.py con la aplicación Streamlit completa\n",
+                            "app_code = '''# -*- coding: utf-8 -*-\n",
+                            "\"\"\"\n",
+                            "🧠 App de Predicción con Streamlit\n",
+                            "Comparación entre Red Neuronal (Keras) y Regresión Lineal\n",
+                            "\"\"\"\n",
+                            "\n",
+                            "import streamlit as st\n",
+                            "import tensorflow as tf\n",
+                            "import numpy as np\n",
+                            "from tensorflow import keras\n",
+                            "from sklearn.linear_model import LinearRegression\n",
+                            "from sklearn.metrics import mean_squared_error, r2_score\n",
+                            "import plotly.graph_objects as go\n",
+                            "import plotly.express as px\n",
+                            "import pandas as pd\n",
+                            "import time\n",
+                            "\n",
+                            "# Configuración de la página\n",
+                            "st.set_page_config(\n",
+                            "    page_title=\"🧠 App de Predicción\",\n",
+                            "    page_icon=\"🧠\",\n",
+                            "    layout=\"wide\",\n",
+                            "    initial_sidebar_state=\"expanded\"\n",
+                            ")\n",
+                            "\n",
+                            "# Título principal\n",
+                            "st.title(\"🧠 App de Predicción con Streamlit\")\n",
+                            "st.subheader(\"Comparación: Red Neuronal (Keras) vs Regresión Lineal\")\n",
+                            "\n",
+                            "# Sidebar para configuración\n",
+                            "st.sidebar.header(\"⚙️ Configuración del Modelo\")\n",
+                            "\n",
+                            "# Slider para número de épocas\n",
+                            "epochs = st.sidebar.slider(\n",
+                            "    \"🔢 Número de Épocas\",\n",
+                            "    min_value=100,\n",
+                            "    max_value=1000,\n",
+                            "    value=500,\n",
+                            "    step=100\n",
+                            ")\n",
+                            "\n",
+                            "# Learning rate\n",
+                            "learning_rate = st.sidebar.slider(\n",
+                            "    \"📈 Learning Rate\",\n",
+                            "    min_value=0.001,\n",
+                            "    max_value=0.1,\n",
+                            "    value=0.01,\n",
+                            "    step=0.001,\n",
+                            "    format=\"%.3f\"\n",
+                            ")\n",
+                            "\n",
+                            "# Optimizador\n",
+                            "optimizer_choice = st.sidebar.selectbox(\n",
+                            "    \"🔄 Optimizador\",\n",
+                            "    options=[\"sgd\", \"adam\", \"rmsprop\"],\n",
+                            "    index=0\n",
+                            ")\n",
+                            "\n",
+                            "# Valor a predecir\n",
+                            "st.sidebar.header(\"🔮 Predicción\")\n",
+                            "input_value = st.sidebar.number_input(\n",
+                            "    \"Ingresa el valor X a predecir:\",\n",
+                            "    min_value=-100.0,\n",
+                            "    max_value=100.0,\n",
+                            "    value=10.0,\n",
+                            "    step=1.0\n",
+                            ")\n",
+                            "\n",
+                            "# Botón para entrenar\n",
+                            "train_button = st.sidebar.button(\"🚀 Entrenar Modelos\", type=\"primary\")\n",
+                            "\n",
+                            "# Datos de entrenamiento\n",
+                            "xs = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)\n",
+                            "ys = np.array([-2.0, 1.0, 4.0, 7.0, 10.0, 13.0], dtype=float)\n",
+                            "\n",
+                            "# Mostrar datos\n",
+                            "st.header(\"📊 Datos de Entrenamiento\")\n",
+                            "data_df = pd.DataFrame({\n",
+                            "    \"X (Entrada)\": xs,\n",
+                            "    \"Y (Salida)\": ys\n",
+                            "})\n",
+                            "st.dataframe(data_df, use_container_width=True, hide_index=True)\n",
+                            "st.info(\"💡 **Patrón:** Y = 3X + 1\")\n",
+                            "\n",
+                            "# Entrenamiento\n",
+                            "if train_button:\n",
+                            "    with st.spinner(\"🔄 Entrenando modelos...\"):\n",
+                            "        # Red Neuronal\n",
+                            "        nn_model = tf.keras.Sequential([\n",
+                            "            keras.layers.Dense(units=1, input_shape=[1])\n",
+                            "        ])\n",
+                            "        nn_model.compile(\n",
+                            "            optimizer=optimizer_choice,\n",
+                            "            loss=\"mean_squared_error\"\n",
+                            "        )\n",
+                            "        history = nn_model.fit(xs, ys, epochs=epochs, verbose=0)\n",
+                            "        nn_prediction = nn_model.predict(\n",
+                            "            np.array([input_value], dtype=float), \n",
+                            "            verbose=0\n",
+                            "        )[0][0]\n",
+                            "        \n",
+                            "        # Regresión Lineal\n",
+                            "        lr_model = LinearRegression()\n",
+                            "        lr_model.fit(xs.reshape(-1, 1), ys)\n",
+                            "        lr_prediction = lr_model.predict([[input_value]])[0]\n",
+                            "    \n",
+                            "    st.success(\"✅ ¡Modelos entrenados!\")\n",
+                            "    \n",
+                            "    # Resultados\n",
+                            "    st.header(\"🎯 Resultados\")\n",
+                            "    expected_value = 3 * input_value + 1\n",
+                            "    \n",
+                            "    col1, col2, col3 = st.columns(3)\n",
+                            "    col1.metric(\"🧠 Red Neuronal\", f\"{nn_prediction:.4f}\")\n",
+                            "    col2.metric(\"📐 Regresión Lineal\", f\"{lr_prediction:.4f}\")\n",
+                            "    col3.metric(\"📊 Esperado\", f\"{expected_value:.4f}\")\n",
+                            "    \n",
+                            "    # Gráficos\n",
+                            "    st.subheader(\"📈 Comparación\")\n",
+                            "    fig = go.Figure(data=[\n",
+                            "        go.Bar(\n",
+                            "            x=[\"Red Neuronal\", \"Regresión Lineal\", \"Esperado\"],\n",
+                            "            y=[nn_prediction, lr_prediction, expected_value],\n",
+                            "            marker_color=[\"#667eea\", \"#764ba2\", \"#28a745\"]\n",
+                            "        )\n",
+                            "    ])\n",
+                            "    st.plotly_chart(fig, use_container_width=True)\n",
+                            "\n",
+                            "# Footer\n",
+                            "st.markdown(\"---\")\n",
+                            "st.markdown(\"🧠 **Taller de Machine Learning** | 2024\")\n",
+                            "'''\n",
+                            "\n",
+                            "with open('app.py', 'w', encoding='utf-8') as f:\n",
+                            "    f.write(app_code)\n",
+                            "\n",
+                            "print('✅ app.py creado exitosamente')\n",
+                            "print('\\n📁 Archivos creados:')\n",
+                            "print('   - app.py')\n",
+                            "print('   - requirements.txt')\n",
+                            "print('\\n🚀 Para ejecutar: streamlit run app.py')"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "## 📋 11. Instrucciones de Despliegue"
+                        ]
+                    },
+                    {
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [
+                            "### Para ejecutar localmente:\n",
+                            "
